@@ -6,13 +6,11 @@ using System.Xml.Linq;
 
 class Program
 {
-
+    private static string filepath; 
+    private static List<Entry> entries = []; 
 
     static void Main(string[] args)
     {
-        string filepath; 
-        List<Entry> entries = []; 
-
         bool start = true;
         while(start)
         {
@@ -37,15 +35,12 @@ class Program
                 case "3":
                     Console.WriteLine("Enter Filename for entries: ");
                     filepath = Console.ReadLine();
-
-                    var jsonEntries = JsonSerializer.Serialize(entries);
-                    File.WriteAllText(filepath, jsonEntries);
+                    SaveEntries();
                 break;
                 case "4":
                     Console.WriteLine("Enter Filename for entries: ");
                     filepath = Console.ReadLine();
-                    var json = File.ReadAllText(filepath);
-                    entries = JsonSerializer.Deserialize<List<Entry>>(json);
+                    LoadEntries();
                 break;
                 case "5":
                     Console.WriteLine("GoodBye");
@@ -65,5 +60,19 @@ class Program
         entry.DisplayPrompt();
         entry.entry = Console.ReadLine();
         return entry;
+    }
+
+    public static void SaveEntries()
+    {
+        var jsonEntries = JsonSerializer.Serialize(entries);
+        File.WriteAllText(filepath, jsonEntries);
+        Console.WriteLine("Successfully saved journal entries");
+    }
+    
+    public static void LoadEntries() 
+    {
+        var json = File.ReadAllText(filepath);
+        entries = JsonSerializer.Deserialize<List<Entry>>(json);
+        Console.WriteLine("Successfully loaded journal entries");
     }
 }
