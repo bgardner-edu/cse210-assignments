@@ -57,6 +57,7 @@ class Program
     {
         Entry entry = new Entry();
         entry.date = DateTime.Now;
+        entry.AskForWellness();
         entry.DisplayPrompt();
         entry.entry = Console.ReadLine();
         return entry;
@@ -68,7 +69,7 @@ class Program
         File.WriteAllText(filepath, jsonEntries);
         Console.WriteLine("Successfully saved journal entries");
     }
-    
+
     public static void LoadEntries() 
     {
         var json = File.ReadAllText(filepath);

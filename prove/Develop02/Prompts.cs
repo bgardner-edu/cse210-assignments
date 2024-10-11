@@ -5,7 +5,7 @@ static class Prompts
     public static string GetRandomPrompt()
     {
         List<string> prompts = [
-            "What happened today?",
+            "What about today do you want to remember?",
             "What was the best thing that happened today?",
             "What was the worst thing that happened today?",
             "What was the most interesting thing I saw or heard today?",
