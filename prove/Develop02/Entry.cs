@@ -2,26 +2,35 @@ using System;
 
 class Entry
 {
-    public string prompt { get; set; }
-    public string entry { get; set; }
-    public string wellness { get; set; }
-    public DateTime date { get; set; }
+    private string _prompt;
+    private string _entry;
+    private string _wellness;
+    private DateTime _date;
+
+    public Entry()
+    {
+        _date = DateTime.Now;
+    }
 
     public void DisplayPrompt()
     {
-        prompt = Prompts.GetRandomPrompt();
-        Console.WriteLine(prompt);
+        _prompt = Prompts.GetRandomPrompt();
+        Console.WriteLine(_prompt);
     }
     public void DisplayEntry()
     {
-        Console.WriteLine($"Date: {date}");
-        Console.WriteLine($"Wellness: {wellness}");
-        Console.WriteLine($"Prompt: {prompt}");
-        Console.WriteLine($"Entry: {entry}\n");
+        Console.WriteLine($"Date: {_date}");
+        Console.WriteLine($"Wellness: {_wellness}");
+        Console.WriteLine($"Prompt: {_prompt}");
+        Console.WriteLine($"Entry: {_entry}\n");
     }
     public void AskForWellness()
     {
         Console.WriteLine("How are you doing today? ");
-        wellness = Console.ReadLine();
+        _wellness = Console.ReadLine();
+    }
+    public void SetEntry(string entry)
+    {
+        _entry = entry;
     }
 }

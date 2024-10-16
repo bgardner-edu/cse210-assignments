@@ -56,10 +56,9 @@ class Program
     public static Entry NewEntry()
     {
         Entry entry = new Entry();
-        entry.date = DateTime.Now;
         entry.AskForWellness();
         entry.DisplayPrompt();
-        entry.entry = Console.ReadLine();
+        entry.SetEntry(Console.ReadLine());
         return entry;
     }
 
