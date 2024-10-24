@@ -6,14 +6,14 @@ class Program
     static void Main(string[] args)
     {
         Reference reference;
-        string text; 
-        try 
+        string text;
+        try
         {
             BOM bom = LoadScriptures();
 
             Console.WriteLine("Would you like to choose a scripture? y/n");
             var choose = Console.ReadLine();
-            if(choose == "y" || choose == "yes")
+            if (choose == "y" || choose == "yes")
             {
                 Console.WriteLine("Enter a book by entering a value between 1 - 15: ");
                 var bookIndex = int.Parse(Console.ReadLine()) - 1;
@@ -29,7 +29,7 @@ class Program
                 (reference, text) = bom.GetRandomScripture();
             }
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             Console.WriteLine(e);
             Console.WriteLine("Failed to get scripture, using default...");
@@ -40,8 +40,11 @@ class Program
         Scripture scripture = new Scripture(reference, text);
 
         bool run = true;
+        bool wordsLeft = true;
         while (run)
         {
+            
+            Console.Clear();
             scripture.DisplayScripture();
             Console.WriteLine("\n\nPress enter to continue or type 'quit' to finish");
             string input = Console.ReadLine();
@@ -51,24 +54,24 @@ class Program
             }
             else
             {
-                bool wordsLeft = scripture.RemoveRandomWords();
-                if (!wordsLeft)
+                if (wordsLeft)
                 {
-                    run = false;
+                    wordsLeft = scripture.RemoveRandomWords();
                 }
                 else
                 {
-                    Console.Clear();
+                    run = false;
                 }
+                
             }
         }
 
     }
-    public static BOM LoadScriptures() 
+    public static BOM LoadScriptures()
     {
         //json file from: https://github.com/bcbooks/scriptures-json/tree/master
         var json = File.ReadAllText("book-of-mormon.json");
-        var scriptures  = JsonSerializer.Deserialize<BOM>(json);
+        var scriptures = JsonSerializer.Deserialize<BOM>(json);
         Console.WriteLine("Successfully loaded the book of mormon");
         return scriptures;
     }

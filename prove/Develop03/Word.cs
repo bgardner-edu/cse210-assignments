@@ -10,13 +10,13 @@ public class Word
     }
     public void DisplayWord()
     {
-        if(_visible)
+        if (_visible)
         {
             Console.Write($"{_word} ");
             return;
         }
         string blank = "";
-        foreach(char c in _word)
+        foreach (char c in _word)
         {
             blank += "_";
         }

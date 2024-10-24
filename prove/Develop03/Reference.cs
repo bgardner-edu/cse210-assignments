@@ -22,7 +22,7 @@ public class Reference
     public void DisplayReference()
     {
         string fullVerse;
-        if(_startVerse == _endVerse)
+        if (_startVerse == _endVerse)
         {
             fullVerse = _startVerse.ToString();
         }
