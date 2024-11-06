@@ -9,10 +9,11 @@ class Program
         {
             Console.WriteLine("Welcome to the Mindfullness App\n");
             Console.WriteLine("Menu Options");
-            Console.WriteLine("1. Breathing Activity");
-            Console.WriteLine("2. Reflecting Activity");
-            Console.WriteLine("3. Listing Activity");
-            Console.WriteLine("4. quit");
+            Console.WriteLine("1. Check-In Activity");
+            Console.WriteLine("2. Breathing Activity");
+            Console.WriteLine("3. Reflecting Activity");
+            Console.WriteLine("4. Listing Activity");
+            Console.WriteLine("5. quit");
 
             var option = Console.ReadLine();
 
@@ -22,26 +23,31 @@ class Program
             switch (option)
             {
                 case "1":
-                    BreathingActivity breathing = new BreathingActivity();
-                    breathing.StartBreathing();
-                    //Console.Clear();
+                    CheckInActivity checkin = new CheckInActivity();
+                    checkin.StartCheckin();
+                    Console.Clear();
                     break;
                 case "2":
-                    ReflectionActivity reflecting = new ReflectionActivity();
-                    reflecting.StartReflection();
-                    //Console.Clear();
+                    BreathingActivity breathing = new BreathingActivity();
+                    breathing.StartBreathing();
+                    Console.Clear();
                     break;
                 case "3":
-                    ListingActivity listing = new ListingActivity();
-                    listing.StartListing();
-                    //Console.Clear();
+                    ReflectionActivity reflecting = new ReflectionActivity();
+                    reflecting.StartReflection();
+                    Console.Clear();
                     break;
                 case "4":
+                    ListingActivity listing = new ListingActivity();
+                    listing.StartListing();
+                    Console.Clear();
+                    break;
+                case "5":
                     Console.WriteLine("GoodBye");
                     running = false;
                     break;
                 default:
-                    //Console.Clear();
+                    Console.Clear();
                     Console.WriteLine("Not a valid input, please choose an option below.\n");
                     continue;
             }

@@ -20,7 +20,6 @@ public class Activity
         var dotsIndex = 0;
         for(int i = 0; i < duration; i++)
         {
-            //Add code to remove dots
             Console.Write(dots[dotsIndex]);
             Thread.Sleep(1000);
             Console.Write("\b \b");
@@ -43,12 +42,15 @@ public class Activity
         }
         Console.Write($"\b \b");
     }
-    public void ShowWelcomeMsg()
+    public void ShowWelcomeMsg(bool duration = true)
     {
         Console.WriteLine($"Welcome to the {_name} activity!\n");
         Console.WriteLine(_discription);
-        Console.WriteLine($"\nHow long would you like to do this activity in seconds? ");
-        _duration = int.Parse(Console.ReadLine());
+        if (duration)
+        {
+            Console.WriteLine($"\nHow long would you like to do this activity in seconds? ");
+            _duration = int.Parse(Console.ReadLine());
+        }
 
         Console.WriteLine("Get Ready...");
         ShowLoading(5);
@@ -58,5 +60,6 @@ public class Activity
         Console.WriteLine("Well Done!");
         Console.WriteLine($"You have completed {_duration} seconds of {_name} activity.");
         ShowLoading(5);
+        Console.Clear();
     }
 }
