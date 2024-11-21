@@ -17,9 +17,8 @@ class Program
             Console.WriteLine($"Menu Options");
             Console.WriteLine($"    1. Create New Goal");
             Console.WriteLine($"    2. List Goals");
-            Console.WriteLine($"    3. Save Goals");
-            Console.WriteLine($"    4. Record Event");
-            Console.WriteLine($"    5. Quit");
+            Console.WriteLine($"    3. Record Event");
+            Console.WriteLine($"    4. Quit");
             Console.WriteLine($"Select a choice from the menu: ");
 
             var option = Console.ReadLine();
@@ -28,26 +27,24 @@ class Program
             {
                 case "1":
                     person.CreateNewGoal();
-                    //Console.Clear();
+                    SavePerson(person);
+                    Console.Clear();
                     break;
                 case "2":
+                    Console.Clear();
                     person.ListGoals();
-                    //Console.Clear();
                     break;
                 case "3":
+                    person.RecordEvent();
                     SavePerson(person);
-                    //Console.Clear();
+                    Console.Clear();
                     break;
                 case "4":
-                    person.RecordEvent();
-                    //Console.Clear();
-                    break;
-                case "5":
                     Console.WriteLine("GoodBye");
                     running = false;
                     break;
                 default:
-                    //Console.Clear();
+                    Console.Clear();
                     Console.WriteLine("Not a valid input, please choose an option below.\n");
                     continue;
             }

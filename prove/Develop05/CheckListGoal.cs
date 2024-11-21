@@ -32,6 +32,6 @@ public class CheckListGoal : Goal
     }
         public override string SaveGoal()
     {
-        return $"CLG::{_name}::{_description}::{_points}::{_bonusPoints}::{_count}::{_completedCount}\n";
+        return $"CLG::{_name}::{_description}::{_points}::{_bonusPoints}::{_count}::{_completedCount}::{_completed}\n";
     }
 }

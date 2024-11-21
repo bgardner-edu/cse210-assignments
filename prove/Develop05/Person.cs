@@ -5,7 +5,7 @@ public class Person
 {
     public string Name { get; set; }
     public int Points { get; set; }
-    private List<Goal> _goals { get; set; }
+    private List<Goal> _goals;
 
     public Person(string name)
     {
@@ -65,6 +65,7 @@ public class Person
             goal.DisplayGoal();
             count++;
         }
+        Console.WriteLine();
     }
     public void RecordEvent()
     {
@@ -102,7 +103,7 @@ public class Person
                     _goals.Add(eg);
                     break;
                 case "CLG":
-                    Goal clg = new CheckListGoal(details[1], details[2], int.Parse(details[3]), int.Parse(details[4]), int.Parse(details[5]), int.Parse(details[6]), bool.Parse(details[5]));
+                    Goal clg = new CheckListGoal(details[1], details[2], int.Parse(details[3]), int.Parse(details[4]), int.Parse(details[5]), int.Parse(details[6]), bool.Parse(details[7]));
                     _goals.Add(clg);
                     break;
                 default:
