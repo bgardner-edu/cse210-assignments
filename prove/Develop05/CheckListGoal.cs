@@ -3,16 +3,23 @@ public class CheckListGoal : Goal
     private int _bonusPoints;
     private int _count;
     private int _completedCount;
-    public CheckListGoal(string name, string description, int points, int bonusPoints, int count) : base(name, description, points)
+    public CheckListGoal(string name, string description, int points, int bonusPoints, int count, int completedCount = 0, bool completed = false) : base(name, description, points)
     {
         _bonusPoints = bonusPoints;
         _count = count;
-        _completedCount = 0;
+        _completedCount = completedCount;
+        _completed = completed;
     }
     public override void DisplayGoal()
     {
-        //TODO finish this...
-        Console.WriteLine($"{_name} completed {_completedCount}/{_count}");
+        if (_completed)
+        {
+            Console.WriteLine($"[X] {_name} completed {_completedCount}/{_count}");
+        }
+        else
+        {
+            Console.WriteLine($"[] {_name} completed {_completedCount}/{_count}");
+        }
     }
     public override int CompleteGoal()
     {
@@ -22,5 +29,9 @@ public class CheckListGoal : Goal
             return _bonusPoints + _points;
         }
         return _points;
+    }
+        public override string SaveGoal()
+    {
+        return $"CLG::{_name}::{_description}::{_points}::{_bonusPoints}::{_count}::{_completedCount}\n";
     }
 }
