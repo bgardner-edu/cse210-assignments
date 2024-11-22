@@ -7,15 +7,7 @@ public class EternalGoal : Goal
     }
     public override void DisplayGoal()
     {
-        if(_completedCount > 0)
-        {
-            Console.WriteLine($"[X] {_name} Completed: {_completedCount} times");
-        }
-        else
-        {
-            Console.WriteLine($"[] {_name}");
-        }
-        
+        Console.WriteLine($"[] {_name} Completed: {_completedCount} times");
     }
     public override int CompleteGoal()
     {
