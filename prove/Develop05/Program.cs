@@ -26,23 +26,23 @@ class Program
                 case "1":
                     person.CreateNewGoal();
                     SavePerson(person);
-                    Console.Clear();
+                    //Console.Clear();
                     break;
                 case "2":
-                    Console.Clear();
+                    //Console.Clear();
                     person.ListGoals();
                     break;
                 case "3":
                     person.RecordEvent();
                     SavePerson(person);
-                    Console.Clear();
+                    //Console.Clear();
                     break;
                 case "4":
                     Console.WriteLine("GoodBye");
                     running = false;
                     break;
                 default:
-                    Console.Clear();
+                    //Console.Clear();
                     Console.WriteLine("Not a valid input, please choose an option below.\n");
                     continue;
             }

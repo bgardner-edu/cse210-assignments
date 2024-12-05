@@ -1,11 +1,53 @@
-using System;
-
-//www.plantuml.com/plantuml/png/nLJ1Rjim3BthAtHCvkO7Z2BecW1PWNORbcmx3gnDj49aAvFe38QNVvzeXwxjPJlii5uCY-_nwP6IU1C8F5M5LJktTlhwvsAXlpg_vzKWjCsUdREJu3jNu2Jq1PzDPhkeMba8GN_qxib3eHhr0AQSpLDzT2PN9y4_1_IDMdmheS1K1_AcV8fBYXBt9b2g-NlDYakLC7asPCvLil88XE_nnnrXqUiddCQHS5kl8pxBN76mI9Yd-Z7MSectgmz_vZs0tpDl9NY_rM8BHnmMbhM5jKtWoaoKCYMfDwCQurAskgrJpHvtfi0Opl60PHu-b98siQGIbXwruKglBcXTwR5KRDO6wQvrpif90uyn7p8wIHUaZ276bRyDQrVY9PIBbynpPNqB-flKg8J__zttseI3XNhZmCxcPm-IEWh-nOxSOZcNDjYpaXwTMXJU_tGibkMDSGVv_tKxAEzR7CdobO-ryaUisoFzNc4Wuyfm7XiTTHaHZw6o9F6u-r8bJI0Wavtq3lROgSWD7u0Rf4zTCeENqhSlZ1wUZWFk0cZLlAIrKwCAwDDs1lwsyRs3V3phEY9BtiGsLeNz1G00
+//www.plantuml.com/plantuml/png/lPB1JiCm38RlVeeS6TrUe9hGf39n0JJ10w0ijKP46bU9EuJAtfsqB4iwSUc5IwJ_T_JxS-ADP-cuQmmya3HY_RrQYLVTj0Q3piqjexFINBdLEwgFH-rvzA4oqdknStHmie4UdgIsDujI74dNSBhKqNcoFQpUh6om59wTjeSWMzAMVId26TGXH0OnfA-7-3k0ed8e6P_nSp0koKKayCbwGKMktXxHSawWHeAHjeVR2K2GDNhbTCkQR79phA0K3Q_3M9TYJsIW657oeAN8SfAPnIoWwEK-5AJYqxtshP5V-KHvkJhtY_M18WwIVrKFHLBpUIOKPuXfwwitp1TY-CjukQwei_pBMQHB_u6KjZ52xSbsVZTPAvNmWlWBEiNCnrwAr38wgUEieJPewwunFm00
 
 class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello FinalProject World!");
+        Console.WriteLine("Enter your username: ");
+        var name = Console.ReadLine();
+        User user = Data.SetupUser(name);
+        bool running = true;
+        while (running)
+        {
+            Console.WriteLine($"Welcome {name}!");
+
+
+            //List Top To do Items
+            user.ListItemsByDate();
+
+            //Display menu
+            Console.WriteLine($"Menu");
+            Console.WriteLine($"    1. Add New To Do Item");
+            Console.WriteLine($"    2. List To Do's by Category");
+            Console.WriteLine($"    3. List To Do's by Priority");
+            Console.WriteLine($"    4. Mark To Do Completed");
+            Console.WriteLine($"    5. Quit");
+
+            var input = Console.ReadLine();
+
+            switch (input)
+            {
+                case "1":
+                    user.CreateNewItem();
+                    break;
+                case "2":
+                    user.ListItemsByType();
+                    break;
+                case "3":
+                    user.ListItemsByDate();
+                    break;
+                case "4":
+                    user.MarkItemCompleted();
+                    break;
+                case "5":
+                    Console.WriteLine("GoodBye");
+                    running = false;
+                    break;
+                default:
+                    Console.WriteLine("Not a valid input, please choose an option below.\n");
+                    continue;
+            }
+        }
     }
 }

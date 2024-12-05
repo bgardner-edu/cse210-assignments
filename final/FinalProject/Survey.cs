@@ -1,27 +1,34 @@
 public static class Survey
 {
-    private static List<string> _questions = ["Do you have work to do items?", "Do you have school to do items?", "Do you have home repair to do items?", "Do you have vehicle to do items?"];
-    private static List<int> _results = [];
-    public static List<int> TakeSurvey()
+    private static Dictionary<string, string> _questions = new Dictionary<string, string>
+    {
+        {"Do you have work to do items?", "Work"},
+        {"Do you have school to do items?","School"},
+        {"Do you have home repair to do items?", "Home"},
+        {"Do you have vehicle to do items?", "Car"}
+    };
+    private static List<string> _results = [];
+    public static List<string> TakeSurvey(string name)
     {
         Console.WriteLine("Answer the following questions with either y for yes or n for no: ");
-        foreach (string question in _questions)
+        foreach (string question in _questions.Keys)
         {
             Console.WriteLine(question);
             var result = Console.ReadLine().ToLower();
 
             if (result == "y" || result == "yes")
             {
-                _results.Add(_questions.IndexOf(question));
+                _results.Add(_questions[question]);
             }
         }
+        SaveSurvey(name, _results);
         return _results;
     }
-    public static List<int> GetResults()
+    public static List<string> GetResults()
     {
         return _results;
     }
-    public static void SetResults(List<int> results)
+    public static void SetResults(List<string> results)
     {
         if (results.Count < 1)
         {
@@ -31,5 +38,27 @@ public static class Survey
         {
             Console.WriteLine("Cannot update survey results when they're already set.");
         }
+    }
+    public static List<string> ParseSurvey(string contents)
+    {
+        var results = contents.Split("\n");
+        List<string> surveyResults = [];
+        foreach(string result in results)
+        {
+            if(result != "")
+            {
+                surveyResults.Add(result);
+            }
+        }
+        return surveyResults;
+    }
+    private static void SaveSurvey(string name, List<string> results)
+    {
+        var contents = "";
+        foreach(string result in results)
+        {
+            contents += $"{result}\n";
+        }
+        Data.SaveSurveyResults(name, contents);
     }
 }
