@@ -12,10 +12,6 @@ class Program
         {
             Console.WriteLine($"Welcome {name}!");
 
-
-            //List Top To do Items
-            user.ListItemsByDate();
-
             //Display menu
             Console.WriteLine($"Menu");
             Console.WriteLine($"    1. Add New To Do Item");

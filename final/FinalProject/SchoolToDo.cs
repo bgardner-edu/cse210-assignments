@@ -17,7 +17,7 @@ public class SchoolToDo : ToDo
         }
 
     }
-    public SchoolToDo(string name, DateTime completeBy, int dependsOn, string forClass, string id, bool completed) : base(name, completeBy, dependsOn, id, completed)
+    public SchoolToDo(string id, string name, DateTime completeBy, int dependsOn, bool completed, string forClass) : base(id, name, completeBy, dependsOn,  completed)
     {
         _forClass = forClass;
     }
@@ -47,6 +47,9 @@ public class SchoolToDo : ToDo
         {
             _completed = true;
         }
-
+    }
+    public override string Save()
+    {
+        return $"std||{_id}||{_name}||{_completeBy}||{_dependsOn}||{_completed}||{_forClass}";
     }
 }

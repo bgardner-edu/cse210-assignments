@@ -5,7 +5,8 @@ public static class Survey
         {"Do you have work to do items?", "Work"},
         {"Do you have school to do items?","School"},
         {"Do you have home repair to do items?", "Home"},
-        {"Do you have vehicle to do items?", "Car"}
+        {"Do you have vehicle to do items?", "Car"},
+        {"Do you want general to do items", "General"},
     };
     private static List<string> _results = [];
     public static List<string> TakeSurvey(string name)

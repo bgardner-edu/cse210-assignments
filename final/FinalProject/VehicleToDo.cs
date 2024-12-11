@@ -7,11 +7,11 @@ public class VehicleToDo : ToDo
         var response = Console.ReadLine();
         if (response == "y" || response == "yes")
         {
-            while(true)
+            while (true)
             {
                 Console.WriteLine("Enter part or done to finish:");
                 var r = Console.ReadLine();
-                if(r.ToLower() == "done")
+                if (r.ToLower() == "done")
                 {
                     return;
                 }
@@ -23,7 +23,7 @@ public class VehicleToDo : ToDo
             _parts = [];
         }
     }
-    public VehicleToDo(string name, DateTime completeBy, int dependsOn, List<string> parts, string id, bool completed) : base(name, completeBy, dependsOn, id, completed)
+    public VehicleToDo(string id, string name, DateTime completeBy, int dependsOn, bool completed, List<string> parts) : base(id, name, completeBy, dependsOn, completed)
     {
         _parts = parts;
     }
@@ -32,7 +32,7 @@ public class VehicleToDo : ToDo
         if (_parts.Count > 0)
         {
             Console.WriteLine($"Todo: {_name} \nParts: ");
-            foreach(string part in _parts)
+            foreach (string part in _parts)
             {
                 Console.WriteLine(part);
             }
@@ -41,5 +41,9 @@ public class VehicleToDo : ToDo
         {
             base.ListToDoItem();
         }
+    }
+    public override string Save()
+    {
+        return $"vtd||{_id}||{_name}||{_completeBy}||{_dependsOn}||{_completed}||{_parts}";
     }
 }

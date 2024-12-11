@@ -16,7 +16,7 @@ public class WorkToDo : ToDo
             _reportBackTo = "";
         }
     }
-    public WorkToDo(string name, DateTime completeBy, int dependsOn, string reportBackTo, string id, bool completed) : base(name, completeBy, dependsOn, id, completed)
+    public WorkToDo(string id, string name, DateTime completeBy, int dependsOn, bool completed, string reportBackTo) : base(id, name, completeBy, dependsOn, completed)
     {
         _reportBackTo = reportBackTo;
     }
@@ -46,6 +46,9 @@ public class WorkToDo : ToDo
         {
             _completed = true;
         }
-
+    }
+    public override string Save()
+    {
+        return $"wtd||{_id}||{_name}||{_completeBy}||{_dependsOn}||{_completed}||{_reportBackTo}";
     }
 }
