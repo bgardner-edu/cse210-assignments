@@ -1,12 +1,10 @@
-//www.plantuml.com/plantuml/png/lPB1JiCm38RlVeeS6TrUe9hGf39n0JJ10w0ijKP46bU9EuJAtfsqB4iwSUc5IwJ_T_JxS-ADP-cuQmmya3HY_RrQYLVTj0Q3piqjexFINBdLEwgFH-rvzA4oqdknStHmie4UdgIsDujI74dNSBhKqNcoFQpUh6om59wTjeSWMzAMVId26TGXH0OnfA-7-3k0ed8e6P_nSp0koKKayCbwGKMktXxHSawWHeAHjeVR2K2GDNhbTCkQR79phA0K3Q_3M9TYJsIW657oeAN8SfAPnIoWwEK-5AJYqxtshP5V-KHvkJhtY_M18WwIVrKFHLBpUIOKPuXfwwitp1TY-CjukQwei_pBMQHB_u6KjZ52xSbsVZTPAvNmWlWBEiNCnrwAr38wgUEieJPewwunFm00
-
 class Program
 {
     static void Main(string[] args)
     {
         Console.WriteLine("Enter your username: ");
         var name = Console.ReadLine();
-        User user = Data.SetupUser(name);
+        User user = SetupUser(name);
         bool running = true;
         while (running)
         {
@@ -45,5 +43,24 @@ class Program
                     continue;
             }
         }
+    }
+    public static User SetupUser(string name)
+    {
+        var surveyFile = $"{name}_survey.txt";
+        var toDoFile = $"{name}_todo.txt";
+        if (File.Exists(surveyFile))
+        {
+            var survey = File.ReadAllText(surveyFile);
+
+            if (File.Exists(toDoFile))
+            {
+                var toDo = File.ReadAllText(toDoFile);
+                return new User(name, survey, toDo);
+            }
+
+            return new User(name, survey);
+        }
+
+        return new User(name);
     }
 }

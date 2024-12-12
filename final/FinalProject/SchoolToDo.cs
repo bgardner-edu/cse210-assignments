@@ -1,7 +1,7 @@
 public class SchoolToDo : ToDo
 {
     private string _forClass;
-    public SchoolToDo(string name, DateTime completeBy, int dependsOn) : base(name, completeBy, dependsOn)
+    public SchoolToDo(string name, DateTime completeBy, string dependsOn) : base(name, completeBy, dependsOn)
     {
         Console.WriteLine("Is this an assignment for a specific class? y/n");
         var response = Console.ReadLine();
@@ -17,7 +17,7 @@ public class SchoolToDo : ToDo
         }
 
     }
-    public SchoolToDo(string id, string name, DateTime completeBy, int dependsOn, bool completed, string forClass) : base(id, name, completeBy, dependsOn,  completed)
+    public SchoolToDo(string id, string name, DateTime completeBy, string dependsOn, bool completed, string forClass) : base(id, name, completeBy, dependsOn,  completed)
     {
         _forClass = forClass;
     }
@@ -25,7 +25,7 @@ public class SchoolToDo : ToDo
     {
         if (_forClass != "")
         {
-            Console.WriteLine($"Todo: {_name} \nFor class: {_forClass}");
+            Console.WriteLine($"School To Do: {_name} \nFor class: {_forClass}");
         }
         else
         {

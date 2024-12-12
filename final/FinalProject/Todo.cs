@@ -5,10 +5,10 @@ public class ToDo
     protected string _id;
     protected string _name;
     protected DateTime _completeBy;
-    protected int _dependsOn;
+    protected string _dependsOn;
     protected bool _completed;
 
-    public ToDo(string name, DateTime completeBy, int dependsOn)
+    public ToDo(string name, DateTime completeBy, string dependsOn)
     {
         _id = Guid.NewGuid().ToString();
         _name = name;
@@ -16,7 +16,7 @@ public class ToDo
         _dependsOn = dependsOn;
         _completed = false;
     }
-    public ToDo(string id, string name, DateTime completeBy, int dependsOn, bool completed)
+    public ToDo(string id, string name, DateTime completeBy, string dependsOn, bool completed)
     {
         _id = id;
         _name = name;
@@ -36,9 +36,13 @@ public class ToDo
     {
         return _completed;
     }
+    public string GetDependsOn()
+    {
+        return _dependsOn;
+    }
     public virtual void ListToDoItem()
     {
-        Console.WriteLine($"Todo: {_name}");
+        Console.WriteLine($"To do: {_name}");
     }
     public virtual void MarkAsDone()
     {

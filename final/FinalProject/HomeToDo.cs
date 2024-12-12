@@ -2,7 +2,7 @@ public class HomeToDo : ToDo
 {
     private List<string> _parts;
     private bool _outside;
-    public HomeToDo(string name, DateTime completeBy, int dependsOn) : base(name, completeBy, dependsOn)
+    public HomeToDo(string name, DateTime completeBy, string dependsOn) : base(name, completeBy, dependsOn)
     {
         Console.WriteLine("Do you need to order any parts? y/n");
         var response = Console.ReadLine();
@@ -34,7 +34,7 @@ public class HomeToDo : ToDo
             _outside = false;
         }
     }
-    public HomeToDo(string id, string name, DateTime completeBy, int dependsOn, bool completed, List<string> parts, bool outside) : base(id, name, completeBy, dependsOn, completed)
+    public HomeToDo(string id, string name, DateTime completeBy, string dependsOn, bool completed, List<string> parts, bool outside) : base(id, name, completeBy, dependsOn, completed)
     {
         _parts = parts;
         _outside = outside;
@@ -43,7 +43,7 @@ public class HomeToDo : ToDo
     {
         if (_parts.Count > 0)
         {
-            Console.WriteLine($"Todo: {_name}");
+            Console.WriteLine($"Home To Do: {_name}");
             if (_outside)
             {
                 Console.WriteLine("Make sure the weather is nice.");
@@ -56,7 +56,7 @@ public class HomeToDo : ToDo
         }
         else
         {
-            Console.WriteLine($"Todo: {_name}");
+            Console.WriteLine($"Home To Do: {_name}");
             if (_outside)
             {
                 Console.WriteLine("Make sure the weather is nice.");

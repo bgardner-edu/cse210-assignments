@@ -49,36 +49,40 @@ public class User
         var completeByString = Console.ReadLine();
         var completeByDate = DateTime.ParseExact(completeByString, "MM-dd", CultureInfo.InvariantCulture);
 
-        //Fix this...
-        //Console.Write("Does it depend on another to do item? y/n ");
-        var dependsOn = 0;//int.Parse(Console.ReadLine());
+        var dependsOn = "";
+        Console.Write("Does it depend on another to do item? y/n ");
+        var input = Console.ReadLine();
+        if (input == "y" || input == "yes")
+        {
+            dependsOn = GetDependsId();
+        }
 
         switch (option)
         {
             case "general":
                 ToDo td = new ToDo(name, completeByDate, dependsOn);
                 _toDoList.Add(td);
-                Save();
+                SaveToDos();
                 break;
             case "work":
                 WorkToDo wtd = new WorkToDo(name, completeByDate, dependsOn);
                 _toDoList.Add(wtd);
-                Save();
+                SaveToDos();
                 break;
             case "school":
                 SchoolToDo std = new SchoolToDo(name, completeByDate, dependsOn);
                 _toDoList.Add(std);
-                Save();
+                SaveToDos();
                 break;
             case "home":
                 HomeToDo htd = new HomeToDo(name, completeByDate, dependsOn);
                 _toDoList.Add(htd);
-                Save();
+                SaveToDos();
                 break;
             case "car":
                 VehicleToDo vtd = new VehicleToDo(name, completeByDate, dependsOn);
                 _toDoList.Add(vtd);
-                Save();
+                SaveToDos();
                 break;
             default:
                 break;
@@ -87,10 +91,19 @@ public class User
     public void ListItemsByDate(bool completed = false)
     {
         var filteredItems = _toDoList.FindAll(t => t.GetCompleted() == completed);
-        var sortedByDate = _toDoList.OrderBy(t => t.GetDateTime()).ToList();
+        var sortedByDate = filteredItems.OrderBy(t => t.GetDateTime()).ToList();
         foreach (ToDo item in sortedByDate)
         {
             item.ListToDoItem();
+            Console.WriteLine();
+
+            ToDo dependant = _toDoList.Find(t => t.GetId() == item.GetDependsOn());
+            if (dependant != null)
+            {
+                Console.WriteLine($"\nThis Goal depends on:");
+                dependant.ListToDoItem();
+                Console.WriteLine();
+            }
             Console.WriteLine();
         }
         Console.WriteLine("Press Enter to continue: ");
@@ -129,7 +142,7 @@ public class User
         }
 
         var filteredItems = _toDoList.FindAll(t => t.GetCompleted() == completed);
-        var sortedByType = _toDoList.FindAll(t => t.GetType().ToString() == type).ToList();
+        var sortedByType = filteredItems.FindAll(t => t.GetType().ToString() == type).ToList();
         foreach (ToDo item in sortedByType)
         {
             item.ListToDoItem();
@@ -140,16 +153,41 @@ public class User
     }
     public void MarkItemCompleted()
     {
-        //Finish This!
+        DisplayToDoListWithNum(_toDoList);
+        Console.WriteLine("Enter the number for the goal you want to complete");
+        var input = int.Parse(Console.ReadLine()) - 1;
+
+        _toDoList[input].MarkAsDone();
+        SaveToDos();
     }
-    private void Save()
+    private string GetDependsId()
+    {
+        var filteredItems = _toDoList.FindAll(t => t.GetCompleted() == false);
+        DisplayToDoListWithNum(filteredItems);
+        Console.WriteLine("Enter the number for the to do item it depends on: ");
+        var input = int.Parse(Console.ReadLine()) - 1;
+        return filteredItems[input].GetId();
+    }
+    private void DisplayToDoListWithNum(List<ToDo> list)
+    {
+        var count = 1;
+
+        foreach (ToDo item in list)
+        {
+            Console.Write($"{count}. ");
+            item.ListToDoItem();
+            Console.WriteLine();
+            count++;
+        }
+    }
+    private void SaveToDos()
     {
         var content = "";
         foreach (ToDo todo in _toDoList)
         {
             content += $"{todo.Save()}\n";
         }
-        Data.SaveToDos(_name, content);
+        File.WriteAllText($"{_name}_todo.txt", content);
     }
     private List<ToDo> ParseToDos(string toDos)
     {
@@ -161,23 +199,23 @@ public class User
             switch (data[0])
             {
                 case "td":
-                    ToDo td = new ToDo(data[1], data[2], DateTime.Parse(data[3]), int.Parse(data[4]), bool.Parse(data[5]));
+                    ToDo td = new ToDo(data[1], data[2], DateTime.Parse(data[3]), data[4], bool.Parse(data[5]));
                     todos.Add(td);
                     break;
                 case "wtd":
-                    WorkToDo wtd = new WorkToDo(data[1], data[2], DateTime.Parse(data[3]), int.Parse(data[4]), bool.Parse(data[5]), data[6]);
+                    WorkToDo wtd = new WorkToDo(data[1], data[2], DateTime.Parse(data[3]), data[4], bool.Parse(data[5]), data[6]);
                     todos.Add(wtd);
                     break;
                 case "std":
-                    SchoolToDo std = new SchoolToDo(data[1], data[2], DateTime.Parse(data[3]), int.Parse(data[4]), bool.Parse(data[5]), data[6]);
+                    SchoolToDo std = new SchoolToDo(data[1], data[2], DateTime.Parse(data[3]), data[4], bool.Parse(data[5]), data[6]);
                     todos.Add(std);
                     break;
                 case "vtd":
-                    VehicleToDo vtd = new VehicleToDo(data[1], data[2], DateTime.Parse(data[3]), int.Parse(data[4]), bool.Parse(data[5]), data[6].Split(',').ToList());
+                    VehicleToDo vtd = new VehicleToDo(data[1], data[2], DateTime.Parse(data[3]), data[4], bool.Parse(data[5]), data[6].Split(',').ToList());
                     todos.Add(vtd);
                     break;
                 case "htd":
-                    HomeToDo htd = new HomeToDo(data[1], data[2], DateTime.Parse(data[3]), int.Parse(data[4]), bool.Parse(data[5]), data[6].Split(',').ToList(), bool.Parse(data[7]));
+                    HomeToDo htd = new HomeToDo(data[1], data[2], DateTime.Parse(data[3]), data[4], bool.Parse(data[5]), data[6].Split(',').ToList(), bool.Parse(data[7]));
                     todos.Add(htd);
                     break;
                 default:

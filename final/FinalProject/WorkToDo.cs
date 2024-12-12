@@ -1,7 +1,7 @@
 public class WorkToDo : ToDo
 {
     private string _reportBackTo;
-    public WorkToDo(string name, DateTime completeBy, int dependsOn) : base(name, completeBy, dependsOn)
+    public WorkToDo(string name, DateTime completeBy, string dependsOn) : base(name, completeBy, dependsOn)
     {
         Console.WriteLine("Do you need report back to someone? y/n");
         var response = Console.ReadLine();
@@ -16,7 +16,7 @@ public class WorkToDo : ToDo
             _reportBackTo = "";
         }
     }
-    public WorkToDo(string id, string name, DateTime completeBy, int dependsOn, bool completed, string reportBackTo) : base(id, name, completeBy, dependsOn, completed)
+    public WorkToDo(string id, string name, DateTime completeBy, string dependsOn, bool completed, string reportBackTo) : base(id, name, completeBy, dependsOn, completed)
     {
         _reportBackTo = reportBackTo;
     }
@@ -24,7 +24,7 @@ public class WorkToDo : ToDo
     {
         if (_reportBackTo != "")
         {
-            Console.WriteLine($"Todo: {_name} \nReport back to: {_reportBackTo}");
+            Console.WriteLine($"Work To Do: {_name} \nReport back to: {_reportBackTo}");
         }
         else
         {

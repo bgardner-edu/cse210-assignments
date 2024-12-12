@@ -1,7 +1,7 @@
 public class VehicleToDo : ToDo
 {
     private List<string> _parts;
-    public VehicleToDo(string name, DateTime completeBy, int dependsOn) : base(name, completeBy, dependsOn)
+    public VehicleToDo(string name, DateTime completeBy, string dependsOn) : base(name, completeBy, dependsOn)
     {
         Console.WriteLine("Do you need to order any parts? y/n");
         var response = Console.ReadLine();
@@ -23,7 +23,7 @@ public class VehicleToDo : ToDo
             _parts = [];
         }
     }
-    public VehicleToDo(string id, string name, DateTime completeBy, int dependsOn, bool completed, List<string> parts) : base(id, name, completeBy, dependsOn, completed)
+    public VehicleToDo(string id, string name, DateTime completeBy, string dependsOn, bool completed, List<string> parts) : base(id, name, completeBy, dependsOn, completed)
     {
         _parts = parts;
     }
@@ -31,7 +31,7 @@ public class VehicleToDo : ToDo
     {
         if (_parts.Count > 0)
         {
-            Console.WriteLine($"Todo: {_name} \nParts: ");
+            Console.WriteLine($"Car To Do: {_name} \nParts: ");
             foreach (string part in _parts)
             {
                 Console.WriteLine(part);

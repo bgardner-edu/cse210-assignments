@@ -44,9 +44,9 @@ public static class Survey
     {
         var results = contents.Split("\n");
         List<string> surveyResults = [];
-        foreach(string result in results)
+        foreach (string result in results)
         {
-            if(result != "")
+            if (result != "")
             {
                 surveyResults.Add(result);
             }
@@ -56,10 +56,15 @@ public static class Survey
     private static void SaveSurvey(string name, List<string> results)
     {
         var contents = "";
-        foreach(string result in results)
+        foreach (string result in results)
         {
             contents += $"{result}\n";
         }
-        Data.SaveSurveyResults(name, contents);
+        SaveSurveyResults(name, contents);
     }
+    public static void SaveSurveyResults(string username, string contents)
+    {
+        File.WriteAllText($"{username}_survey.txt", contents);
+    }
+
 }
