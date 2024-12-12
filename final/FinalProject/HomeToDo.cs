@@ -1,6 +1,6 @@
 public class HomeToDo : ToDo
 {
-    private List<string> _parts;
+    private List<string> _parts = [];
     private bool _outside;
     public HomeToDo(string name, DateTime completeBy, string dependsOn) : base(name, completeBy, dependsOn)
     {
@@ -14,14 +14,10 @@ public class HomeToDo : ToDo
                 var r = Console.ReadLine();
                 if (r.ToLower() == "done")
                 {
-                    return;
+                    break;
                 }
                 _parts.Add(r);
             }
-        }
-        else
-        {
-            _parts = [];
         }
         Console.WriteLine("Does this require nice weather? y/n");
         response = Console.ReadLine();
@@ -65,6 +61,11 @@ public class HomeToDo : ToDo
     }
     public override string Save()
     {
-        return $"htd||{_id}||{_name}||{_completeBy}||{_dependsOn}||{_completed}||{_parts}||{_outside}";
+        string parts = "";
+        foreach (string p in _parts)
+        {
+            parts += $"{p}:";
+        }
+        return $"htd||{_id}||{_name}||{_completeBy}||{_dependsOn}||{_completed}||{parts}||{_outside}";
     }
 }

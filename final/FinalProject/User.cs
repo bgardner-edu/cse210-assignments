@@ -45,7 +45,7 @@ public class User
         Console.Write("What do you need to do?  ");
         var name = Console.ReadLine();
 
-        Console.Write("When do you need to complete it? Enter date like mm-dd");
+        Console.Write("When do you need to complete it? Enter date like mm-dd ");
         var completeByString = Console.ReadLine();
         var completeByDate = DateTime.ParseExact(completeByString, "MM-dd", CultureInfo.InvariantCulture);
 
@@ -87,6 +87,7 @@ public class User
             default:
                 break;
         }
+        //Console.Clear();
     }
     public void ListItemsByDate(bool completed = false)
     {
@@ -108,11 +109,12 @@ public class User
         }
         Console.WriteLine("Press Enter to continue: ");
         Console.ReadLine();
+        //Console.Clear();
     }
     public void ListItemsByType(bool completed = false)
     {
         var type = "";
-        Console.WriteLine($"Which To Do type would you like to create?");
+        Console.WriteLine($"Which To Do type would you like see?");
         foreach (string result in _surveyResult)
         {
             Console.WriteLine($"{result}");
@@ -150,6 +152,7 @@ public class User
         }
         Console.WriteLine("Press Enter to continue: ");
         Console.ReadLine();
+        //Console.Clear();
     }
     public void MarkItemCompleted()
     {
@@ -211,11 +214,11 @@ public class User
                     todos.Add(std);
                     break;
                 case "vtd":
-                    VehicleToDo vtd = new VehicleToDo(data[1], data[2], DateTime.Parse(data[3]), data[4], bool.Parse(data[5]), data[6].Split(',').ToList());
+                    VehicleToDo vtd = new VehicleToDo(data[1], data[2], DateTime.Parse(data[3]), data[4], bool.Parse(data[5]), data[6].Split(':').ToList());
                     todos.Add(vtd);
                     break;
                 case "htd":
-                    HomeToDo htd = new HomeToDo(data[1], data[2], DateTime.Parse(data[3]), data[4], bool.Parse(data[5]), data[6].Split(',').ToList(), bool.Parse(data[7]));
+                    HomeToDo htd = new HomeToDo(data[1], data[2], DateTime.Parse(data[3]), data[4], bool.Parse(data[5]), data[6].Split(':').ToList(), bool.Parse(data[7]));
                     todos.Add(htd);
                     break;
                 default:

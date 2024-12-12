@@ -3,13 +3,13 @@ class Program
     static void Main(string[] args)
     {
         Console.WriteLine("Enter your username: ");
-        var name = Console.ReadLine();
+        var name = Console.ReadLine().ToLower();
         User user = SetupUser(name);
+
+        Console.WriteLine($"Welcome {name}!");
         bool running = true;
         while (running)
         {
-            Console.WriteLine($"Welcome {name}!");
-
             //Display menu
             Console.WriteLine($"Menu");
             Console.WriteLine($"    1. Add New To Do Item");
