@@ -87,7 +87,8 @@ public class User
             default:
                 break;
         }
-        //Console.Clear();
+        Console.Clear();
+        Console.WriteLine("Successfually created to do item!");
     }
     public void ListItemsByDate(bool completed = false)
     {
@@ -109,7 +110,7 @@ public class User
         }
         Console.WriteLine("Press Enter to continue: ");
         Console.ReadLine();
-        //Console.Clear();
+        Console.Clear();
     }
     public void ListItemsByType(bool completed = false)
     {
@@ -152,7 +153,7 @@ public class User
         }
         Console.WriteLine("Press Enter to continue: ");
         Console.ReadLine();
-        //Console.Clear();
+        Console.Clear();
     }
     public void MarkItemCompleted()
     {
